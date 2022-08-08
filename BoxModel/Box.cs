@@ -55,8 +55,10 @@ namespace BoxModel
         /// </summary>
         public int NumToGive { get; set; }
         public double Width { get { return _width; } }
-        public double Height { get { return _height; } } 
+        public double Height { get { return _height; } }
         #endregion
+
+        #region Methods
         public override string ToString()
         {
             return $"Width: {_width}, Height: {_height}, Amount: {NumToGive}";
@@ -90,6 +92,7 @@ namespace BoxModel
         public string GetInfo()
         {
             return $"Width: {_width}, Height: {_height}\nAmount Available: {NumOfCopies}\nLast Time Modifed: {LastTimeBuyed:d}\nExpiration Date:{LastTimeBuyed.AddDays(14):d}\n";
-        }
+        } 
+        #endregion
     }
 }
