@@ -8,9 +8,11 @@ namespace BoxModel
 {
     public static class Constants
     {
-        public static readonly int MaxNumOfCopies = 40;
-        public static readonly int NumOfDaysUntilExpired = 14;
-        public static readonly int NumOfSizesAllowedToSearch = 5;
+        public const int MaxNumOfCopies = 40;
+        public const int NumOfDaysUntilExpired = 14;
+        public const double PrecentageAllowedToAdvanced = 1.5;
+        public const int LargestWidth = 25;
+        public const int LargestHeight = 25;
     }
     public class Box
     {

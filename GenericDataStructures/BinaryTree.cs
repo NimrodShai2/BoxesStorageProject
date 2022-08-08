@@ -30,7 +30,13 @@ namespace GenericDataStructures
                 _key = key;
             }
             public V Value { get { return _value; } set { _value = value; } }
+            /// <summary>
+            /// Represents a larger value.
+            /// </summary>
             public BinaryNode Left { get { return left; } set { left = value; } }
+            /// <summary>
+            /// Represents a smaller value.
+            /// </summary>
             public BinaryNode Right { get { return right; } set { right = value; } }
             public BinaryNode Father { get { return father; } set { father = value; } }
             public K Key { get { return _key; } set { _key = value; } }
@@ -221,10 +227,44 @@ namespace GenericDataStructures
                 value = curr.Value;
                 return true;
             }
-            if(curr.Key.CompareTo(key) > 0)
+            if (curr.Key.CompareTo(key) > 0)
                 return TryFind(key, curr.Right, out value);
             return TryFind(key, curr.Left, out value);
 
+        }
+        private K GetLarger(K key, BinaryNode tempNode, BinaryNode node)
+        {
+            int compare = node.Key.CompareTo(key);
+
+            if (compare > 0)
+            {
+                if (node.Right != null)
+                {
+                    tempNode = node;
+                    return GetLarger(key, tempNode, node.Right);
+                }
+                return node.Key;
+
+            }
+            //(compare < 0)
+
+            if (node.Left != null)
+            {
+                return GetLarger(key, tempNode, node.Left);
+            }
+            if (tempNode.Key.CompareTo(key) > 0)
+            {
+                return tempNode.Key;
+            }
+            //if(tempNode.Key.CompareTo(key)>0
+
+            return default;
+        }
+
+
+        public K GetLarger(K key)
+        {
+            return GetLarger(key, _root, _root);
         }
     }
 }

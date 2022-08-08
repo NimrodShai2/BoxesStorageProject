@@ -47,14 +47,14 @@ namespace BoxesView
         {
             double tempHeight = height, tempWidth = width;
             var res = new DoubleLinkedList<Box>();
-            while (tempWidth < width + Constants.NumOfSizesAllowedToSearch && amount > 0)//Lets the storage go up 5 width units untill it determines that the order is not complete.
+            while (tempWidth > 0 && tempWidth < width * Constants.PrecentageAllowedToAdvanced && amount > 0)//Lets the storage go up 50% width units untill it determines that the order cannot be completed.
             {
-                while (tempHeight < height + Constants.NumOfSizesAllowedToSearch && amount > 0)//Lets the storage go up 5 height units untill it determines that the order cannot be completed.
+                while (tempHeight > 0 && tempHeight < height * Constants.PrecentageAllowedToAdvanced && amount > 0)//Lets the storage go up 50% height units untill it determines that the order cannot be completed.
                 {
-                    Box b = store.GetBox(width, tempHeight);
+                    Box b = store.GetBox(tempWidth, tempHeight);
                     if (b == null)
                     {
-                        tempHeight++;
+                        tempHeight = store.GetLargerHeight(tempWidth, tempHeight);
                         continue;
                     }
                     for (int i = 0; i < b.NumOfCopies; i++)
@@ -66,13 +66,14 @@ namespace BoxesView
                     }
                     res.AddToStart(b);
                     if (amount > 0)
-                        tempHeight++;
+                        tempHeight = store.GetLargerHeight(tempWidth, tempHeight);
                 }
                 if (amount == 0)
                     break;
-                else
+                else if (amount > 0)
                 {
-                    tempWidth++;
+                    tempHeight = height;
+                    tempWidth = store.GetLargerWidth(tempWidth);
                 }
             }
             _ = amount == 0 ? completed = true : completed = false;
@@ -96,7 +97,7 @@ namespace BoxesView
         /// <param name="order"></param>
         public void CancelOrder(DoubleLinkedList<Box> order)
         {
-            foreach(Box b in order)
+            foreach (Box b in order)
             {
                 b.NumToGive = 0;
             }
@@ -106,7 +107,7 @@ namespace BoxesView
             if (order == null || order.IsEmpty)
             {
                 return "Sorry! We cant offer you any boxes of your request!";
-            } 
+            }
             StringBuilder sb = new StringBuilder();
             foreach (Box b in order)
             {

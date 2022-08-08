@@ -90,6 +90,31 @@ namespace BoxModel
                 bool found2 = inner.TryFind(b.Height, out Box temp);
                 return found2;
             }
+            public Box GetLarger(Box b)
+            {
+                if (b == null)
+                    return null;
+                BinaryTree<double,Box> inner;
+                bool found = _main.TryFind(b.Width, out inner);
+                if (!found) { return null; }
+                double newHeight = inner.GetLarger(b.Height);
+                if (newHeight > b.Height)
+                    return GetBox(b.Width, newHeight);
+                double newWidth = _main.GetLarger(b.Width);
+                return GetBox(newWidth, b.Height);
+            }
+            public double GetLargerHeight(double width, double height)
+            {
+                BinaryTree<double, Box> inner;
+                bool found = _main.TryFind(width, out inner);
+                if (!found)
+                    return -1;
+                return inner.GetLarger(height);
+            }
+            public double GetLargerWidth(double width)
+            {
+                return _main.GetLarger(width);
+            }
         }
         #endregion
 
@@ -166,6 +191,18 @@ namespace BoxModel
                 _storage.Remove(_dates.FirstInLine);
                 _dates.Dequeue();
             }
+        }
+        public Box GetLarger(Box b)
+        {
+            return _storage.GetLarger(b);
+        }
+        public double GetLargerHeight(double width, double height)
+        {
+            return _storage.GetLargerHeight(width, height);
+        }
+        public double GetLargerWidth(double width)
+        {
+            return _storage.GetLargerWidth(width);
         }
         public bool Contains(Box b)
         {
