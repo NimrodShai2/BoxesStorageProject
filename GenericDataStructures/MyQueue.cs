@@ -13,8 +13,8 @@ namespace GenericDataStructures
         /// <summary>
         /// Number of items in the queue.
         /// </summary>
-        public int Count { get { return _list.Count; } }
-        public bool IsEmpty { get { return _list.IsEmpty; } }
+        public int Count { get =>  _list.Count;  }
+        public bool IsEmpty { get => _list.IsEmpty;  }
         public MyQueue()
         {
             _list = new DoubleLinkedList<T>();
@@ -23,10 +23,8 @@ namespace GenericDataStructures
         /// Add an item to the queue.
         /// </summary>
         /// <param name="value"></param>
-        public void Enqueue(T value)
-        {
-            _list.AddToEnd(value);
-        }
+        public void Enqueue(T value) => _list.AddToEnd(value);
+        
         /// <summary>
         /// 
         /// </summary>
@@ -40,18 +38,20 @@ namespace GenericDataStructures
             return value;
         }
         /// <summary>
+        /// Removes an item entirley from the queue, without returning it.
+        /// </summary>
+        /// <param name="item"></param>
+        public void RemoveFromLine(T item) => _list.Remove(item);
+        /// <summary>
         /// The first item in the queue.
         /// </summary>
-        public T FirstInLine { get { return _list.First; } }
+        public T FirstInLine { get => _list.First;  }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _list.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
+        
+        IEnumerator IEnumerable.GetEnumerator() =>  GetEnumerator() ;
+        
+           
+        
     }
 }

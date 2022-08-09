@@ -166,6 +166,7 @@ namespace BoxModel
         public void Remove(Box b)
         {
             _storage.Remove(b);
+            _dates.RemoveFromLine(b);
         }
         /// <summary>
         /// Add a box a number of times.

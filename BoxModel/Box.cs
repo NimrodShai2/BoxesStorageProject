@@ -79,10 +79,8 @@ namespace BoxModel
         /// <summary>
         /// Updates the expiration date for the box.
         /// </summary>
-        public void UpdateTimeBuyed()
-        {
-            LastTimeBuyed = DateTime.Now;
-        }
+        public void UpdateTimeBuyed() => LastTimeBuyed = DateTime.Now;
+       
         /// <summary>
         /// Updates the number of copies available and sets the NumToGive to 0.
         /// </summary>
