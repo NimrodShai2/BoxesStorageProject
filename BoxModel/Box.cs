@@ -8,14 +8,20 @@ namespace BoxModel
 {
     public static class Constants
     {
-        public const int MaxNumOfCopies = 40;
-        public const int NumOfDaysUntilExpired = 14;
-        public const double PrecentageAllowedToAdvanced = 1.5;
-        public const int LargestWidth = 25;
-        public const int LargestHeight = 25;
+        static readonly Configuration configuration = new Configuration();
+        public static readonly int MaxNumOfCopies = configuration.Data.MaxNumOfBoxes;
+        public static readonly int NumOfDaysUntilExpired = configuration.Data.NumofDaysUntilExpired;
+        public static readonly double PrecentageAllowedToAdvanced = configuration.Data.PrecentageAllowedToSearch;
+        public static readonly int LargestWidth = configuration.Data.LargestWidth;
+        public static readonly int LargestHeight = configuration.Data.LargestHeight;
+        public static readonly int AlmostNoBoxes = configuration.Data.AlmostNoBoxes;
     }
     public class Box
     {
+        #region Statics
+        static readonly string AboutToEndMessage = $"Number of copies for this box is below {Constants.AlmostNoBoxes}!\n"; 
+        #endregion
+
         #region Fields
         /// <summary>
         /// The last time a box was modified.
@@ -56,14 +62,16 @@ namespace BoxModel
         /// Number of copies that are currently part of an order.
         /// </summary>
         public int NumToGive { get; set; }
-        public double Width { get { return _width; } }
-        public double Height { get { return _height; } }
+        public double Width => _width;
+        public double Height => _height;
+        public bool AboutToEnd => NumOfCopies <= Constants.AlmostNoBoxes;
         #endregion
 
         #region Methods
         public override string ToString()
         {
-            return $"Width: {_width}, Height: {_height}, Amount: {NumToGive}";
+            string s =$"Width: {_width}, Height: {_height}, Amount: {NumToGive}\n";
+            return AboutToEnd ? s + AboutToEndMessage : s;
         }
         public override bool Equals(object obj)
         {
@@ -91,7 +99,8 @@ namespace BoxModel
         }
         public string GetInfo()
         {
-            return $"Width: {_width}, Height: {_height}\nAmount Available: {NumOfCopies}\nLast Time Modifed: {LastTimeBuyed:d}\nExpiration Date:{LastTimeBuyed.AddDays(14):d}\n";
+            string s = $"Width: {_width}, Height: {_height}\nAmount Available: {NumOfCopies}\nLast Time Modifed: {LastTimeBuyed:d}\nExpiration Date:{LastTimeBuyed.AddDays(14):d}\n";
+            return AboutToEnd ? s + AboutToEndMessage : s;
         } 
         #endregion
     }

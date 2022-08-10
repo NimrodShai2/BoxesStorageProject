@@ -1,0 +1,10 @@
+{
+
+  "MaxNumOfBoxes": 40,
+  "NumofDaysUntilExpired": 14,
+  "PrecentageAllowedToSearch": 1.5,
+  "LargestWidth": 25,
+  "LargestHeight": 25,
+  "AlmostNoBoxes": 2
+
+}
