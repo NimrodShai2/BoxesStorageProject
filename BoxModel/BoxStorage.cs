@@ -209,6 +209,10 @@ namespace BoxModel
         {
             return _storage.Contains(b);
         }
+        public void SendToEndOfLine(Box item)
+        {
+            _dates.SendToEndOfLine(item);
+        }
         public int Count { get { return _dates.Count; } }
         /// <summary>
         /// 
@@ -237,12 +241,12 @@ namespace BoxModel
         #region Enumerators
         public IEnumerator<Box> GetEnumerator()
         {
-            return ((IEnumerable<Box>)_dates).GetEnumerator();
+            return _dates.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_dates).GetEnumerator();
+            return _dates.GetEnumerator();
         } 
         #endregion
     }

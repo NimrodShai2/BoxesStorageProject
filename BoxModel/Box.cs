@@ -19,7 +19,7 @@ namespace BoxModel
     public class Box
     {
         #region Statics
-        static readonly string AboutToEndMessage = $"Number of copies for this box is below {Constants.AlmostNoBoxes}!\n"; 
+        static readonly string AboutToEndMessage = $"Number of copies for this box is below {Constants.AlmostNoBoxes + 1}!\n"; 
         #endregion
 
         #region Fields

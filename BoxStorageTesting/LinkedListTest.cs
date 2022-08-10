@@ -52,5 +52,16 @@ namespace BoxStorageTesting
             queue.Enqueue(4);
             Assert.AreEqual(1, queue.Count);
         }
+        [TestMethod]
+        public void RemoveFromLineTest()
+        {
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+            queue.Enqueue(4);
+            queue.Enqueue(5);
+            queue.RemoveFromLine(3);
+            Assert.IsFalse(queue.Contains(3));
+        }
     }
 }

@@ -58,6 +58,12 @@ namespace GenericDataStructures
         /// <param name="value"></param>
         public void Remove(T value)
         {
+            if (_head.Next == null)
+            {
+                _head = null;
+                _tail = null;
+                return;
+            }
             DoubleNode current1 = _head, current2 = _tail;
             while(current1 != null && current2 != null && !current2.Data.Equals(value) && !current1.Data.Equals(value))
             {
@@ -73,6 +79,7 @@ namespace GenericDataStructures
                 else
                 {
                     current1.Prev.Next = current1.Next;
+                    current1.Next.Prev = current1.Prev;
                 }
             }
             else if (current2.Data.Equals(value))
@@ -83,7 +90,8 @@ namespace GenericDataStructures
                 }
                 else
                 {
-                    _tail.Next.Prev = current2.Prev;
+                    current2.Next.Prev = current2.Prev;
+                    current2.Prev.Next = current2.Next;
                 }
             }
         }

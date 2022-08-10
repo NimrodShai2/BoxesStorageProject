@@ -42,6 +42,12 @@ namespace GenericDataStructures
         /// </summary>
         /// <param name="item"></param>
         public void RemoveFromLine(T item) => _list.Remove(item);
+
+        public void SendToEndOfLine(T item)
+        {
+            _list.Remove(item);
+            _list.AddToEnd(item);
+        }
         /// <summary>
         /// The first item in the queue.
         /// </summary>

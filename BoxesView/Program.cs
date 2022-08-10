@@ -10,13 +10,17 @@ namespace BoxesView
 {
     internal class Program
     {
+        static Timer timer = new Timer();
         static StoreManager manager = new StoreManager();
         static void Main(string[] args)
         {
+            timer.Enabled = true;
+            timer.Start();
+            timer.Interval = (int)new TimeSpan(1, 0, 0, 0).TotalMilliseconds;
+            timer.Tick += UdateDates;
             string choice;
             while (true)
             {
-                manager.UpdateDates();//Each time an action is finished, the program will check for and delete expired boxes.
                 Console.WriteLine("Welcome! What would you like to do today?");
                 PresentOptions();
                 choice = Console.ReadLine();
@@ -40,6 +44,11 @@ namespace BoxesView
                 Console.WriteLine("Goodbye!");
                 break;
             }
+        }
+
+        private static void UdateDates(object sender, EventArgs e)
+        {
+            manager.UpdateDates();
         }
 
         private static void ShowAllBoxes()

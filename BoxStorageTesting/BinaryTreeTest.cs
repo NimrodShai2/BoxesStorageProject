@@ -46,9 +46,11 @@ namespace BoxStorageTesting
             binaryTree.Add(7, 7);
             binaryTree.Add(8, 8);
             binaryTree.Add(9, 9);
-            binaryTree.Remove(8);
-            Assert.IsFalse(binaryTree.Contains(8));
-            Assert.IsTrue(binaryTree.Contains(9));
+            binaryTree.Add(3, 3);
+            binaryTree.Add(5, 5);
+            binaryTree.Remove(3);
+            Assert.IsFalse(binaryTree.Contains(3));
+            Assert.IsTrue(binaryTree.Contains(5));
         }
         [TestMethod]
         public void RemoveTestInvalid()
@@ -65,8 +67,14 @@ namespace BoxStorageTesting
             binaryTree.Add(12, 6);
             binaryTree.Add(13, 7);
             binaryTree.Add(10, 6);
-            int i;
-            Assert.IsTrue(binaryTree.TryFind(10, out i));
+            Assert.IsTrue(binaryTree.TryFind(10, out int i));
+        }
+        [TestMethod]
+        public void GetLargerTestValid()
+        {
+            binaryTree.Add(1, 3);
+            binaryTree.Add(2, 3);
+            Assert.AreEqual(binaryTree.GetLarger(1), 2);
         }
     }
 

@@ -89,6 +89,7 @@ namespace BoxesView
             {
                 b.UpdateStock();
                 b.UpdateTimeBuyed();
+                store.SendToEndOfLine(b);
             }
         }
         /// <summary>
