@@ -1,7 +1,7 @@
 {
 
   "MaxNumOfBoxes": 40,
-  "NumofDaysUntilExpired": 14,
+  "NumofDaysUntilExpired": 5,
   "PrecentageAllowedToSearch": 1.5,
   "LargestWidth": 25,
   "LargestHeight": 25,

@@ -25,6 +25,11 @@ namespace BoxesView
             Box b = store.GetBox(width, height);
             if (b == null)
             {
+                if (amount > Constants.MaxNumOfCopies)
+                {
+                    valid = false;
+                    return;
+                }
                 b = new Box(width, height);
             }
             else if (amount + b.NumOfCopies >= Constants.MaxNumOfCopies)
@@ -76,7 +81,7 @@ namespace BoxesView
                     tempWidth = store.GetLargerWidth(tempWidth);
                 }
             }
-            _ = amount == 0 ? completed = true : completed = false;
+            completed = amount == 0 ? true : false;
             return res;
         }
         /// <summary>

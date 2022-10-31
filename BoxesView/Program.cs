@@ -10,13 +10,13 @@ namespace BoxesView
 {
     internal class Program
     {
-        static Timer timer = new Timer();
-        static StoreManager manager = new StoreManager();
+        static readonly Timer timer = new Timer();
+        static readonly StoreManager manager = new StoreManager();
         static void Main(string[] args)
         {
             timer.Enabled = true;
             timer.Start();
-            timer.Interval = (int)new TimeSpan(1, 0, 0, 0).TotalMilliseconds;
+            timer.Interval = (int)new TimeSpan( 0, 0, 0, 1).TotalMilliseconds;
             timer.Tick += UdateDates;
             string choice;
             while (true)
@@ -132,8 +132,7 @@ namespace BoxesView
                 else
                 {
                     Console.WriteLine("Enter the amount of copies you would like to add:");
-                    int amount;
-                    bool legal = int.TryParse(Console.ReadLine(), out amount);
+                    bool legal = int.TryParse(Console.ReadLine(), out int amount);
                     if (legal && amount > 0)
                     {
                         manager.AddBox(width, height, amount, out bool valid);
@@ -170,7 +169,6 @@ namespace BoxesView
             int amount;
             string choice;
             DoubleLinkedList<Box> res;
-            bool completed;
             while (true)
             {
                 Console.WriteLine("Please enter the present's width, its height, and then the amount required");
@@ -191,7 +189,7 @@ namespace BoxesView
                     Console.WriteLine("Boxes cannot have a value of 0 or minus. Neither can amount of boxes. Try again.");
                     continue;
                 }
-                res = manager.TakeOrder(width, height, amount, out completed);
+                res = manager.TakeOrder(width, height, amount, out bool completed);
                 if (completed)
                 {
                     Console.WriteLine("Your order was completed:");

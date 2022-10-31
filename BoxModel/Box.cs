@@ -99,7 +99,7 @@ namespace BoxModel
         }
         public string GetInfo()
         {
-            string s = $"Width: {_width}, Height: {_height}\nAmount Available: {NumOfCopies}\nLast Time Modifed: {LastTimeBuyed:d}\nExpiration Date:{LastTimeBuyed.AddDays(14):d}\n";
+            string s = $"Width: {_width}, Height: {_height}\nAmount Available: {NumOfCopies}\nLast Time Modifed: {LastTimeBuyed:d}\nExpiration Date:{LastTimeBuyed.AddDays(Constants.NumOfDaysUntilExpired):d}\n";
             return AboutToEnd ? s + AboutToEndMessage : s;
         } 
         #endregion

@@ -187,7 +187,7 @@ namespace BoxModel
         }
         public void UpdateDates()
         {
-            while (!_dates.IsEmpty && _dates.FirstInLine.LastTimeBuyed.AddDays(Constants.NumOfDaysUntilExpired) < DateTime.Now)//If the time now is past the first boxes' expiration date.
+            while (!_dates.IsEmpty && _dates.FirstInLine.LastTimeBuyed.AddSeconds(Constants.NumOfDaysUntilExpired) < DateTime.Now)//If the time now is past the first boxes' expiration date.
             {
                 _storage.Remove(_dates.FirstInLine);
                 _dates.Dequeue();
@@ -197,10 +197,21 @@ namespace BoxModel
         {
             return _storage.GetLarger(b);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns>The closest larger box by height.</returns>
         public double GetLargerHeight(double width, double height)
         {
             return _storage.GetLargerHeight(width, height);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <returns>The closest larger box by width.</returns>
         public double GetLargerWidth(double width)
         {
             return _storage.GetLargerWidth(width);
@@ -209,6 +220,10 @@ namespace BoxModel
         {
             return _storage.Contains(b);
         }
+        /// <summary>
+        /// Sends the item to the end of the dates line.
+        /// </summary>
+        /// <param name="item"></param>
         public void SendToEndOfLine(Box item)
         {
             _dates.SendToEndOfLine(item);
